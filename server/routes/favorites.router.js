@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
+const axios = require('axios');
 
 router.post('/', (req, res) => {
     const queryText = 'INSERT INTO favorites (url) VALUES ($1)';

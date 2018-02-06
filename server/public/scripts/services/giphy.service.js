@@ -8,23 +8,14 @@ app.service('GiphyService', ['$http', function($http){
 
     //giphy api - get random gif
     self.getRandom = function(){
-        let url = 'http://api.giphy.com/v1/gifs/random?api_key=e5EoJjbBgo5kIWE1H4dgFHuzeXr52REd';
-        $http.get(url).then(function (response) {
+        $http.get('/giphy/random').then(function (response) {
             self.randomResult.url = response.data.data.image_url;
         })
     }
 
     //giphy api - search gifs
     self.searchGiphy = function(searchText) {
-        
-        let url = 'http://api.giphy.com/v1/gifs/search';
-        let config = {
-            params: {
-                api_key: 'How6kWJxlyxCXbf8x3BUEPpfkfOiYEqK',
-                q: searchText
-            }
-        } //end config
-        $http.get(url, config).then(function(response){
+        $http.get(`/giphy/search/${searchText}`).then(function(response){
             console.log('response', response);
             self.searchResult.pagination = response.data.pagination.offset;
             self.searchResult.count = response.data.pagination.count;
